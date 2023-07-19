@@ -1,0 +1,139 @@
+<%- include('header') %>
+
+	<style>
+		* {
+			color: white;
+		}
+
+		.content-wrapper {
+			width: 100%;
+			height: 100%;
+			background-image: url('https://images.pexels.com/photos/1114690/pexels-photo-1114690.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-size: cover;
+			position: relative;
+		}
+
+		.content-wrapper::before {
+			content: "";
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			background-color: rgba(25, 28, 36, 0.316);
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+		}
+		.card {
+ 			background-color: transparent;
+			box-shadow: 0px 0px 5px -1px #7284accc;
+			backdrop-filter: blur(5px);
+		}
+		.btn {
+			padding: 8px 15px;
+			font-weight: 400;
+		}
+		table {
+			width: 100%;
+			text-align: center;
+		}
+		table th,
+		td {
+			border: 2px solid white;
+			padding: 5px 10px;
+		}
+	</style>
+
+	<div class="main-panel">
+		<div class="content-wrapper">
+			<div class="page-header">
+				<h3 class="page-title">Add Extra Sub Category</h3>
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Sub Sub Category</li>
+					</ol>
+				</nav>
+			</div>
+			<% if(message.success.length> 0){ %>
+				<div class="alert alert-success" role="alert">
+					<%= message.success %>
+				</div>
+			<% } %>
+			<div class="row">
+				<div class="col-4 grid-margin stretch-card">
+					<div class="card">
+						<div class="card-body">
+							<form class="forms-sample" method="post" action="/addSubSubCategory">
+								<div class="form-group">
+									<h5 class="card-title m-b-0">Choose Category</h5>
+									<select name="category" class="form-control">
+										<option value="">---Select Category---</option>
+										<% category.map((val)=>{ %>
+											<option value="<%= val.id %> "><%= val.category %></option>
+										<% }) %>
+									</select>
+								</div>
+								<div class="form-group">
+									<h5 class="card-title m-b-0">Choose Sub Category</h5>
+									<select name="subcategory" class="form-control">
+										<option value="">---Select Sub Category---</option>
+										<% subcategory.map((val)=>{ %>
+											<option value="<%= val.id %>"><%= val.subcategory %></option>
+										<% }) %>
+									</select>
+								</div>
+								<div class="form-group">
+									<h5 class="card-title m-b-0">Sub Sub Category</h5>
+									<input type="text" class="form-control" name="exsubcategory"
+										id="exampleInputName1" placeholder="Enter Sub Sub Category">
+								</div>
+								<button type="submit" class="btn btn-light">Submit</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row justify-content-end">
+				<div class="col-6 grid-margin stretch-card">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title m-b-0">View Category</h5>
+							<table>
+								<thead>
+									<tr>
+										<th>Category</th>
+										<th>Sub Category</th>
+										<th>Sub Sub Category</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+										<% exsubcategory.map((val)=>{ %>
+											<tr>
+												<td><%= val.categoryId.category %></td>
+												<td><%= val.subcategoryId.subcategory %></td>
+												<td><%= val.exsubcategory %></td>
+												<td>
+													<a href="#">
+														<i class="mdi mdi-delete"></i>
+													</a> &nbsp || &nbsp
+													<a href="#">
+														<i class="mdi mdi-eyedropper-variant"></i>
+													</a>
+												</td>
+											</tr>
+										<% }) %>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<%- include('footer') %>
+	</div>
+</div>
+	

@@ -1,0 +1,102 @@
+<%- include('header') %>
+	<style>
+		.content-wrapper {
+			width: 100%;
+			height: 100%;
+			background-image: url('https://larsensolutions.no/demos/particle-animation.gif');
+			background-position: left center;
+			background-repeat: no-repeat;
+			background-size: cover;
+			position: relative;
+		}
+		.content-wrapper::before {
+			content: "";
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			background-color: rgba(25, 28, 36, 0.416);
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+		}
+		.card {
+ 			background-color: transparent;
+			background-color: rgba(30, 31, 38, 0.5);
+			backdrop-filter: blur(5px);
+			transition: all 1s ease;
+		}	
+		table{
+ 			width: 100%;
+		}
+		table tr td{
+			display: inline-block;
+			padding: 7px 0px;
+		}
+	</style>
+
+	<!-- partial -->
+	<div class="main-panel">
+		<div class="content-wrapper">
+
+			<div class="page-header">
+				<h3 class="page-title"> Products View </h3>
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="/productview">Product View</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Product tables</li>
+					</ol>
+				</nav>
+			</div>
+			<div class="row">
+				<% productData.map((val)=>{
+					const {id,ProductName, ProductQty,ProductPrice,ProductDescription,image} = val %>
+					<div class="col-lg-3 grid-margin stretch-card">
+								<div class="table-responsive">
+									<div class="card">
+										<div class="card-body text-center">
+											<table>
+												<img src="<%= image %>" class="card-img-top" style="width: 150px; height: 200px;">
+												<tr>
+													<td><h4 class="card-title mt-3"><%= ProductName %></h4></td>
+												</tr> 
+												<tr class="d-flex justify-content-around">
+													<td><h5 class="card-title"><%= "$ "+ProductPrice %></h5></td>
+													<td><span class="card-text"><%= 'Qty : '+ ProductQty %></span></td>
+												</tr>
+												<tr class="d-flex justify-content-between">
+													<td>
+														<p class="card-text"><%= val.categoryId.category %></p>
+													</td>
+													<td>
+														<p class="card-text"><%= val.subcategoryId.subcategory %></p>
+													</td>
+													<td>
+														<p class="card-text"><%= val.exsubcategoryId.exsubcategory %></p>
+													</td>
+												</tr>
+												<tr>
+													<td><p class="card-text"><%= ProductDescription %></p></td>
+												</tr>
+												<tr>
+													<td><a href="#" class="btn btn-primary">Go somewhere</a></td>
+												</tr>
+											</div>
+										</table>
+									<!-- </div> -->
+									 
+								</div>
+							</div>
+						</div>
+					</div>
+					<% }) %>
+			</div>
+		</div>
+	</div>
+ </div>
+</div>
+<!-- plugins:js -->
+<script src="../../assets/vendors/js/vendor.bundle.base.js"></script>
+	</body>
+
+	</html>
